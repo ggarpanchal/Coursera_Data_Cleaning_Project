@@ -44,8 +44,9 @@ names(extracted_raw_data)<-gsub("Acc", "Accelerometer", names(extracted_raw_data
 names(extracted_raw_data)<-gsub("Gyro", "Gyroscope", names(extracted_raw_data))
 names(extracted_raw_data)<-gsub("Mag", "Magnitude", names(extracted_raw_data))
 names(extracted_raw_data)<-gsub("BodyBody", "Body", names(extracted_raw_data))
+tidy_data_full <- extracted_raw_data
 
 # Independent tidy data set with the average of each variable for each activity and each subject ( Step : 5 )
 library(dplyr)
-tidy_data <- extracted_raw_data %>% group_by(subject, activity) %>% summarise_each(funs(mean))
+tidy_data <- tidy_data_full %>% group_by(subject, activity) %>% summarise_each(funs(mean))
 write.table(tidy_data, "tidy_data.txt", row.names = FALSE, quote = FALSE)
